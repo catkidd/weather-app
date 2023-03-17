@@ -46,12 +46,12 @@ const TemperatureAndDetails = () => {
                     Set: <span className="font-medium ml-1">06:45 PM</span>
                 </p>
                 <p className="font-light">|</p>
-                <UilSun />
+                <UilArrowUp />
                 <p className="font-light">
                     High: <span className="font-medium ml-1">45°</span>
                 </p>
                 <p className="font-light">|</p>
-                <UilSun />
+                <UilArrowDown />
                 <p className="font-light">
                     Low: <span className="font-medium ml-1">40°</span>
                 </p>
