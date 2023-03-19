@@ -1,6 +1,8 @@
 import React from "react";
+import { iconUrlFromCode } from "../services/getWeather.service";
 
-const Forecast = (props) => {
+const Forecast = (props, items) => {
+
     return (
         <div>
             <div className="flex items-center justify-start mt-6">
@@ -9,30 +11,17 @@ const Forecast = (props) => {
             <hr className="my-2" />
 
             <div className=" flex flex-row items-center justify-between text-white">
+                
                 <div className="flex flex-col items-center justify-center">
-                    <p className="font-light text-sm">04:30 PM</p>
-                    <img src="https://www.openweathermap.org/img/wn/01d@2x.png" className="w-12 m-1" alt="" />
-                    <p className="font-medium">22°</p>
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                    <p className="font-light text-sm">04:30 PM</p>
-                    <img src="https://www.openweathermap.org/img/wn/01d@2x.png" className="w-12 m-1" alt="" />
-                    <p className="font-medium">22°</p>
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                    <p className="font-light text-sm">04:30 PM</p>
-                    <img src="https://www.openweathermap.org/img/wn/01d@2x.png" className="w-12 m-1" alt="" />
-                    <p className="font-medium">22°</p>
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                    <p className="font-light text-sm">04:30 PM</p>
-                    <img src="https://www.openweathermap.org/img/wn/01d@2x.png" className="w-12 m-1" alt="" />
-                    <p className="font-medium">22°</p>
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                    <p className="font-light text-sm">04:30 PM</p>
-                    <img src="https://www.openweathermap.org/img/wn/01d@2x.png" className="w-12 m-1" alt="" />
-                    <p className="font-medium">22°</p>
+                    <p className="font-light text-sm">{items.title}</p>
+                    <img
+                        src={iconUrlFromCode()}
+                        className="w-12 m-1"
+                        alt=""
+                    />
+                    {items && items.temp && (
+                        <p className="font-medium">{`${items.temp.toFixed()}°`}</p>
+                    )}
                 </div>
             </div>
         </div>
