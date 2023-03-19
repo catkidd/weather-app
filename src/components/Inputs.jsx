@@ -57,7 +57,7 @@ const Inputs = ({ setQuerry, units, setUnits }) => {
                     value={city}
                     onChange={(e) => {
                         setCity(e.currentTarget.value);
-                        console.log(e.currentTarget.value);
+                        // console.log(e.currentTarget.value);
                     }}
                     type="text"
                     placeholder="Search for city..."
