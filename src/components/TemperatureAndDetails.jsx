@@ -9,7 +9,7 @@ import {
     UilSunset,
     UilDashboard,
 } from "@iconscout/react-unicons";
-import { formatToLocalTime, iconUrlFromCode } from "../services/getWeather.service";
+import { formatToLocalTime, iconUrlFromCode } from "../services/getWeatherService";
 
 const TemperatureAndDetails = ({
     weather: {
@@ -34,7 +34,7 @@ const TemperatureAndDetails = ({
             </div>
 
             <div className="flex flex-row items-center justify-between text-white py-3">
-                <img src={iconUrlFromCode(icon)} alt="red-sun" className="w-28 w" />
+                <img src={iconUrlFromCode(icon)} alt="" className="w-28 w" />
                 <p className=" text-6xl">{`${temp.toFixed()}°`}</p>
                 <div className="flex flex-col space-y-2">
                     <div className="flex items-center justify-center font-light text-base">
