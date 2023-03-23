@@ -13,13 +13,10 @@ const getWeatherService = (infoType, searchParams) => {
         .then((response) => {
             return response.data;
         })
-        .catch((error) => {
-            console.error(error);
-        });
+        .catch((error) => {});
 };
 
 const formatCurrentWeather = (data) => {
-    // console.log(data);
     if (!data) {
         return {};
     }

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { UilSearch, UilLocationPoint, UilCelsius, UilFahrenheit } from "@iconscout/react-unicons";
 import { toastifyService } from "../services/toastifyService";
-import axios from "axios";
-
-const API_KEY = "f1db162bd7ae92ff53e0e7439ec0cc95";
 
 function Inputs({ setQuerry, units, setUnits }) {
     const [city, setCity] = useState("");
@@ -16,22 +13,13 @@ function Inputs({ setQuerry, units, setUnits }) {
             return;
         }
 
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
-        axios
-            .get(apiUrl)
-            .then((response) => {
-                return response.status;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-
-        if (city !== "") {
+    
+        // if (city !== "") {
             setQuerry({ q: city });
             setTimeout(() => {
                 setCity("");
             }, 4000);
-        }
+        // }
     };
 
     const handleLocationClick = () => {

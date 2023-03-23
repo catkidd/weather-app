@@ -1,5 +1,4 @@
 import "./App.css";
-// import Forecast from "./components/Forecast";
 import Inputs from "./components/Inputs";
 import TemperatureAndDetails from "./components/TemperatureAndDetails";
 import TimeAndLocation from "./components/TimeAndLocation";
@@ -19,12 +18,13 @@ function App() {
         const fetchWeather = async () => {
             const message = querry.q ? querry.q : "current location.";
             toastifyService.info("Fetching weather for " + message.toUpperCase());
-            await getFormattedWeatherData({ ...querry, units }).then((data) => {
+             getFormattedWeatherData({ ...querry, units }).then((data) => {
                 toastifyService.success(
                     `Sucessfully fetched weather for ${data.name}, ${data.country}.`
                 );
                 setWeather(data);
-                // console.log(data);
+            }).catch((err)=>{
+                toastifyService.error('Failed to fetch data for that city.'); 
             });
         };
 
