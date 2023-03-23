@@ -1,34 +1,46 @@
 import React, { useState } from "react";
 import { UilSearch, UilLocationPoint, UilCelsius, UilFahrenheit } from "@iconscout/react-unicons";
-import { toast } from "react-toastify";
+import { toastifyService } from "../services/toastifyService";
+import axios from "axios";
 
-const Inputs = ({ setQuerry, units, setUnits }) => {
+const API_KEY = "f1db162bd7ae92ff53e0e7439ec0cc95";
+
+function Inputs({ setQuerry, units, setUnits }) {
     const [city, setCity] = useState("");
     const errorMessage = "CITY NOT FOUND! Please enter a valid city name.";
 
-    const handleSearchClick = (data) => {
+    const handleSearchClick = () => {
+        if (!city || city.trim().length === 0) {
+            // console.error("Invalid city name!");
+            toastifyService.error(errorMessage);
+            return;
+        }
+
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
+        axios
+            .get(apiUrl)
+            .then((response) => {
+                return response.status;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
         if (city !== "") {
-            if (data.cod !== "202") {
-                toast.error(errorMessage);
-                setTimeout(() => {
-                    setCity("");
-                }, 4000);
-            } else {
-                setQuerry({ q: city });
-                setTimeout(() => {
-                    setCity("");
-                }, 4000);
-            }
+            setQuerry({ q: city });
+            setTimeout(() => {
+                setCity("");
+            }, 4000);
         }
     };
 
     const handleLocationClick = () => {
         if (navigator.geolocation) {
-            toast.info("Fetching users location");
+            toastifyService.info("Fetching users location");
             navigator.geolocation.getCurrentPosition((position) => {
                 let lat = position.coords.latitude;
                 let lon = position.coords.longitude;
-                toast.success(`User's location fetched successfully!`);
+                toastifyService.success(`User's location fetched successfully!`);
                 setCity(`${lat}, ${lon}`);
 
                 setQuerry({
@@ -97,6 +109,6 @@ const Inputs = ({ setQuerry, units, setUnits }) => {
             </div>
         </div>
     );
-};
+}
 
 export default Inputs;

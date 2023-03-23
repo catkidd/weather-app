@@ -1,3 +1,4 @@
+import axios from "axios";
 import { DateTime } from "luxon";
 
 const API_KEY = "f1db162bd7ae92ff53e0e7439ec0cc95";
@@ -7,15 +8,27 @@ const getWeatherService = (infoType, searchParams) => {
     const url = new URL(BASE_URL + "/" + infoType);
     url.search = new URLSearchParams({ ...searchParams, appid: API_KEY });
 
-    return fetch(url).then((res) => res.json());
+    return axios
+        .get(url)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 };
 
 const formatCurrentWeather = (data) => {
+    // console.log(data);
+    if (!data) {
+        return {};
+    }
     const {
-        coord: { lat, lon },
+        coord: { lon, lat },
         main: { temp, feels_like, temp_min, temp_max, humidity, pressure },
         name,
         dt,
+        cod,
         sys: { country, sunrise, sunset },
         weather,
         wind: { speed },
@@ -41,6 +54,7 @@ const formatCurrentWeather = (data) => {
         speed,
         description,
         icon,
+        cod,
     };
 };
 
